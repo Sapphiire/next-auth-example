@@ -1,0 +1,13 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "indent": [ "warn", 4, { "SwitchCase": 1 } ],
+    "quotes": [ "warn", "single" ],
+    "semi-spacing": [ "warn", { "before": false, "after": false } ],
+    "semi": ["warn", "never"],
+    "no-await-in-loop": "error",
+    "no-alert": "error",
+    "no-duplicate-case": "error",
+    "no-duplicate-imports": "error"
+  }
+}
