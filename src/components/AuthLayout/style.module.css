@@ -1,0 +1,15 @@
+.layout {
+    display: flex;
+    flex-direction: row;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.nav {
+    margin-right: 10px;
+}
+
+.page {
+    flex: 1;
+}

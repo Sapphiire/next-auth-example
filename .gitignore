@@ -33,3 +33,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+.idea/webResources.xml
+.idea/next-client.iml
+.idea/next-client.iml
+*.iml

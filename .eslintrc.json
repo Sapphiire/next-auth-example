@@ -8,6 +8,7 @@
     "no-await-in-loop": "error",
     "no-alert": "error",
     "no-duplicate-case": "error",
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "import/no-anonymous-default-export": "off"
   }
 }
