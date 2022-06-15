@@ -1,14 +1,15 @@
 import '@src/styles/globals.css'
 
 import App, { AppProps, AppContext } from 'next/app'
+import { ThemeProvider } from 'next-themes'
 
 import { wrapper } from '@src/store'
 import { getUser } from '@server/getUser'
 
 import { authSlice } from '@src/services/auth/reducer'
 import {
-    DASHBOARD_PATHNAME,
-    LANDING_PATHNAME,
+    // DASHBOARD_PATHNAME,
+    // LANDING_PATHNAME,
     NOT_AUTH_REQUIRED_URLS
 } from '@src/services/auth/constants'
 import { AuthLayout } from '@src/components/AuthLayout'
@@ -22,7 +23,9 @@ const MyApp = ({ Component, pageProps, isAuth }: AppProps & MyAppProps) => (
     isAuth ?
         (
             <AuthLayout>
-                <Component {...pageProps} />
+                <ThemeProvider>
+                    <Component {...pageProps} />
+                </ThemeProvider>
             </AuthLayout>
         ) :
         <Component {...pageProps} />
@@ -33,6 +36,7 @@ MyApp.getInitialProps = wrapper.getInitialAppProps((store) =>
         const user = getUser(appContext.ctx)
         const url = appContext.router.pathname
         const isAuthRequired = !NOT_AUTH_REQUIRED_URLS.some(pathname => pathname === url)
+        // TODO: Landing always accessed
         //
         // if (typeof window === 'undefined' && appContext.ctx.res) {
         //     if (!user && isAuthRequired) {

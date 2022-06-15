@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.4",
+    "@heroicons/react": "^1.0.6",
     "@reduxjs/toolkit": "^1.8.2",
     "classnames": "^2.3.1",
     "cookies": "^0.8.0",
@@ -25,6 +27,10 @@
     "reselect": "^4.1.5"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
     "@types/cookies": "^0.7.7",
     "@types/http-proxy": "^1.17.9",
     "@types/lodash": "^4.14.182",

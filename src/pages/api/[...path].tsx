@@ -1,7 +1,7 @@
 import Cookies from 'cookies'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { proxy } from '~/server/proxy'
+import { proxy } from '@server/proxy'
 
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => new Promise(
