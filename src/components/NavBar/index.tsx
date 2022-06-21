@@ -46,7 +46,7 @@ const NavBar: React.FC<NavBarProps> = ({ className }) => {
                 {
                     NAVBAR_ROUTES.map(route => (
                         <li key={route.link} className={cn(styles.link, route.link === pathname && styles.active)}>
-                            <Link href={route.link} passHref>
+                            <Link href={route.link}>
                                 {route.name}
                             </Link>
                         </li>
