@@ -1,7 +1,7 @@
-import Cookies from 'cookies'
-import jwtDecode from 'jwt-decode'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { jwtDecode } from '@utils/jwt-decode'
+import { setTokenCookie } from '@utils/cookies'
 import { proxy } from '@server/proxy'
 
 
@@ -18,21 +18,17 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => new Promise(
                         try {
                             const body = JSON.parse(Buffer.concat(data).toString())
                             const token = body?.access_token
-                            const { iat, ...user } = jwtDecode<any>(token, { header: false })
+                            const { iat, ...user } = jwtDecode<any>(token)
 
                             if (user) {
-                                const cookies = new Cookies(req, res)
-                                cookies.set('Authorization', token, {
-                                    httpOnly: true,
-                                    sameSite: 'lax',
-                                })
+                                setTokenCookie(res, token)
 
                                 res.status(200).send({ user })
-                            } else {
-                                res.status(404).send(body)
+                                resolve(user)
                             }
 
-                            resolve(user || body)
+                            res.status(404).send(body)
+                            resolve(body)
                         } catch (err) {
                             reject(err)
                         }

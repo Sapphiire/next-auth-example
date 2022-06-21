@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 
 import { useUser } from '@src/hooks/useUser'
 
@@ -6,14 +6,23 @@ import styles from '@src/styles/Dashboard.module.css'
 
 
 const MapPage: NextPage = () => {
-    const { logout } = useUser()
+    const { signOut } = useUser()
     return (
         <div className={styles.container}>
-            <h1>Map</h1>
+            <h1>Map PAGE</h1>
             <div />
-            <button onClick={logout}>logout</button>
+            <button onClick={signOut}>logout</button>
         </div>
     )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    return {
+        props: {
+            h: '1',
+        }
+    }
 }
 
 

@@ -10,14 +10,14 @@ type IndexPageProps = {
 }
 
 const IndexPage: NextPage<IndexPageProps> = () => {
-    const { login } = useUser()
+    const { signIn } = useUser()
 
     return (
         <div className={styles.container}>
-            <h1>Landing Page</h1>
-            <button onClick={() => login({
-                email: '145@mail.ru',
-                password: '12134'
+            <h1>Index Page</h1>
+            <button onClick={() => signIn({
+                email: '1@mail.ru',
+                password: '1234'
             })}>log in</button>
         </div>
     )

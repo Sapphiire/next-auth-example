@@ -1,38 +1,26 @@
-import { type AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit'
+import {type Action, type ThunkAction, type AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { type Context, createWrapper, HYDRATE } from 'next-redux-wrapper'
+import logger from 'redux-logger'
 
-import { api as authApi } from '@src/services/auth/api'
 import { authSlice } from '@src/services/auth/reducer'
 
 
-const combinedReducer = combineReducers({
-    [authApi.reducerPath]: authApi.reducer,
+const rootReducer = {
     [authSlice.name]: authSlice.reducer,
-})
-
-const rootReducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
-    if (action.type === HYDRATE) {
-        return {
-            ...state,
-            ...action.payload,
-        }
-    }
-    return combinedReducer(state, action)
 }
 
+// const combinedReducer = combineReducers<typeof reducers>(reducers)
 
-const makeStore = (ctx: Context) => configureStore({
-    // TODO: Change Types
-    // @ts-ignore
+export const makeStore = (ctx: Context) => configureStore({
     reducer: rootReducer,
-
-    // TODO: Change Types
-    // @ts-ignore
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(authApi.middleware),
-
-    devTools: true,
+    middleware: getDefaultMiddleware => getDefaultMiddleware(
+        {
+            thunk: true,
+            immutableCheck: true,
+            serializableCheck: true
+        }
+    ).concat(logger)
 })
 
 
@@ -40,6 +28,7 @@ export type Store = ReturnType<typeof makeStore>
 
 export type RootState = ReturnType<Store['getState']>
 export type AppDispatch = Store['dispatch']
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export const useAppDispatch = () => useDispatch<AppDispatch>()

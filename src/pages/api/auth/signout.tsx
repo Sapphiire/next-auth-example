@@ -1,10 +1,9 @@
-import Cookies from 'cookies'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { removeTokenCookie } from '@utils/cookies'
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-    const cookies = new Cookies(req, res)
-    cookies.set('Authorization', null)
+    removeTokenCookie(res)
     res.end()
 }
 

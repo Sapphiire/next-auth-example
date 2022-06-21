@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 
 import { useUser } from '@src/hooks/useUser'
 
@@ -14,6 +14,15 @@ const TransfersPage: NextPage = () => {
             <code>{JSON.stringify(user)}</code>
         </div>
     )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    return {
+        props: {
+            h: '1',
+        }
+    }
 }
 
 

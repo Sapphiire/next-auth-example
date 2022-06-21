@@ -1,13 +1,12 @@
-import Cookies from 'cookies'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { getTokenCookie } from '@utils/cookies'
 import { proxy } from '@server/proxy'
 
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => new Promise(
     (resolve, reject) => {
-        const cookies = new Cookies(req, res)
-        const token = cookies.get('Authorization')
+        const token = getTokenCookie(req)
 
         req.headers.cookie = ''
 

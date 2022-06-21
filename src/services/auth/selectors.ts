@@ -2,7 +2,7 @@ import type { RootState } from '@src/store'
 import type { User } from '@src/services/auth/constants'
 
 
-const selectCurrentUser = (state: RootState): User | null => state.auth.user
+const selectCurrentUser = (state: RootState): User | null => state.auth.data
 
 // WARNING: Testing deep equal selector
 // import { createDeepEqualSelector } from '@src/store/createSelector'
