@@ -1,4 +1,4 @@
-import type { NextPageContext } from 'next'
+import type { NextPageContext, GetServerSidePropsContext } from 'next'
 
 import { getToken } from '@server/getToken'
 import { jwtDecode } from '@utils/jwt-decode'
@@ -6,16 +6,11 @@ import type { nullable } from '@utils/nullable'
 import type { User } from '@src/services/auth/constants'
 
 
-type GetUser = (ctx: NextPageContext) => nullable<User>
+type GetUser = (ctx: NextPageContext | GetServerSidePropsContext) => nullable<User>
 
 const getUser: GetUser = (ctx) => {
     const token = getToken(ctx)
-
-    if (!token) {
-        return null
-    }
-
-    return jwtDecode<User>(token)
+    return token && jwtDecode<User>(token)
 }
 
 
